@@ -1,6 +1,6 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Setup ssh'
+description: 'setup ssh'
 inputs:
   name:
     description: 'Friendly unique name'
@@ -17,5 +17,17 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: ${{ github.action_path }}/entrypoint.sh ${{ inputs.name }} ${{ inputs.host }} ${{ inputs.user }} ${{ inputs.key }}
+    - run: mkdir -p ~/.ssh/
       shell: bash
+    - run: echo "${{ inputs.key }}" > ~/.ssh/${{ inputs.name }}
+      shell: bash
+    - run: chmod 600 ~/.ssh/${{ inputs.name }}
+      shell: bash
+    - run: |
+        cat >>~/.ssh/config <<END
+        Host ${{ inputs.name }}
+          HostName ${{ inputs.host }}
+          User ${{ inputs.user }}
+          IdentityFile ~/.ssh/$1
+          StrictHostKeyChecking no
+        END
