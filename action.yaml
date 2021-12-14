@@ -31,3 +31,4 @@ runs:
           IdentityFile ~/.ssh/$1
           StrictHostKeyChecking no
         END
+      shell: bash
