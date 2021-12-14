@@ -1,0 +1,24 @@
+# action.yml
+name: 'Hello World'
+description: 'Greet someone and record the time'
+inputs:
+  name:
+    description: 'Friendly unique name'
+    required: true
+  host:
+    description: 'Host'
+    required: true
+  user:
+    description: 'User'
+    required: true
+  key:
+    description: 'Key'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.name }}
+    - ${{ inputs.host }}
+    - ${{ inputs.user }}
+    - ${{ inputs.key }}
