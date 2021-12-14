@@ -28,7 +28,7 @@ runs:
         Host ${{ inputs.name }}
           HostName ${{ inputs.host }}
           User ${{ inputs.user }}
-          IdentityFile ~/.ssh/$1
+          IdentityFile ~/.ssh/${{ inputs.name }}
           StrictHostKeyChecking no
         END
       shell: bash
