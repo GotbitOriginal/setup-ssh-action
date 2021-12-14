@@ -15,10 +15,7 @@ inputs:
     description: 'Key'
     required: true
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.name }}
-    - ${{ inputs.host }}
-    - ${{ inputs.user }}
-    - ${{ inputs.key }}
+  using: "composite"
+  steps:
+    - run: ${{ github.action_path }}/entrypoint.sh ${{ inputs.name }} ${{ inputs.host }} ${{ inputs.user }} ${{ inputs.key }}
+      shell: bash
